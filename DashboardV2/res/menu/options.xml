@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+  
+	<item android:id="@+id/itemClignoGauche"
+	     android:title="ClignoG"
+	/>
+	
+	<item android:id="@+id/itemClignoDroit"
+     	android:title="ClignoD"
+     />
+	
+	<item android:id="@+id/itemSmiley"
+    	 android:title="Smiley"
+     />
+	
+	<item android:id="@+id/itemVitesses"
+    	 android:title="Vitesses"
+     />
+	
+	<item android:id="@+id/itemCroisement"
+    	 android:title="Feux croisement"
+     />
+	
+	<item android:id="@+id/itemRoute"
+    	 android:title="Feux route"
+     />
+	
+	<item android:id="@+id/itemBatterie"
+    	 android:title="Voyant batterie"
+     />
+	
+	<item android:id="@+id/itemHuile"
+	    android:title="Voyant huile"
+	 />
+	
+	<item android:id="@+id/itemTempHuile"
+	    android:title="Voyant temp huile"
+	    />
+	
+	<item android:id="@+id/itemTempLiquide"
+	    android:title="Voyant temp liquide"
+	    />
+
+</menu>

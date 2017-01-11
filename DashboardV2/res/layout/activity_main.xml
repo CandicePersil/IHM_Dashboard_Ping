@@ -1,0 +1,471 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bck_color"
+    tools:context="com.ping.dashboardv2.MainActivity" >
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout0"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+
+            <RelativeLayout
+                android:id="@+id/rlClignoGauche"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:background="#ffffff"
+                android:gravity="bottom|end" >
+
+                <ImageView
+                    android:id="@+id/clignoGauche"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:src="@drawable/cligno_g" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rlClignoDroit"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:background="#ffffff" >
+
+                <ImageView
+                    android:id="@+id/clignoDroit"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:src="@drawable/cligno_d" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rlElements"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="75dp" >
+
+                <LinearLayout
+                    android:id="@+id/linearLayout1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:orientation="vertical" >
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" >
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:orientation="vertical" >
+
+                            <TextView
+                                android:id="@+id/tvVitesses"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="25dp"
+                                android:layout_marginTop="15dp"
+                                android:text="3"
+                                android:textColor="#FFFFFF"
+                                android:textSize="56sp" />
+
+                            <TextView
+                                android:id="@+id/tvPointMort"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="25dp"
+                                android:layout_marginTop="15dp"
+                                android:text="N"
+                                android:textColor="#FFFFFF"
+                                android:textSize="56sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true" >
+
+                        <RelativeLayout
+                            android:id="@+id/rlSmiley"
+                            android:layout_width="64dp"
+                            android:layout_height="64dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="50dp"
+                            android:background="#ffffff" >
+
+                            <ImageView
+                                android:id="@+id/smiley"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/smiley" />
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/rlTempHuile"
+                            android:layout_width="70dp"
+                            android:layout_height="70dp"
+                            android:layout_gravity="bottom"
+                            android:layout_marginLeft="14dp"
+                            android:background="@color/orange" >
+
+                            <ImageView
+                                android:id="@+id/imageView1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerHorizontal="true"
+                                android:layout_centerVertical="true"
+                                android:src="@drawable/temp_huile" />
+                        </RelativeLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/Layout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="3dp"
+                        android:layout_marginTop="12dp" >
+
+                        <RelativeLayout
+                            android:id="@+id/rlBatterie"
+                            android:layout_width="70dp"
+                            android:layout_height="70dp"
+                            android:layout_marginLeft="6dp"
+                            android:background="@color/orange" >
+
+                            <ImageView
+                                android:id="@+id/batterie"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerHorizontal="true"
+                                android:layout_centerVertical="true"
+                                android:src="@drawable/batterie" />
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/rlHuile"
+                            android:layout_width="70dp"
+                            android:layout_height="70dp"
+                            android:layout_marginLeft="9dp"
+                            android:background="@color/orange" >
+
+                            <ImageView
+                                android:id="@+id/huile"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerHorizontal="true"
+                                android:layout_centerVertical="true"
+                                android:src="@drawable/huile" />
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/rlTempLiquide"
+                            android:layout_width="70dp"
+                            android:layout_height="70dp"
+                            android:layout_marginLeft="9dp"
+                            android:background="@color/orange" >
+
+                            <ImageView
+                                android:id="@+id/liquide"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerHorizontal="true"
+                                android:layout_centerVertical="true"
+                                android:src="@drawable/liquide" />
+                        </RelativeLayout>
+
+                        <TextView
+                            android:id="@+id/tvHeures"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom"
+                            android:layout_marginLeft="30dp"
+                            android:text="hh"
+                            android:textColorLink="@color/blue"
+                            android:textSize="30sp" />
+
+                        <TextView
+                            android:id="@+id/tvDeuxPoints"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom"
+                            android:text=":"
+                            android:textColorLink="@color/blue"
+                            android:textSize="30sp" />
+
+                        <TextView
+                            android:id="@+id/tvMinutes"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom"
+                            android:text="MM"
+                            android:textColorLink="@color/blue"
+                            android:textSize="30sp" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom"
+                            android:layout_marginBottom="10dp"
+                            android:orientation="vertical" >
+
+                            <TextView
+                                android:id="@+id/jourLettres"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="DAY"
+                                android:textSize="10sp" />
+
+                            <LinearLayout
+                                android:layout_width="69dp"
+                                android:layout_height="wrap_content" >
+
+                                <TextView
+                                    android:id="@+id/jour"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="jj"
+                                    android:textSize="10sp" />
+
+                                <TextView
+                                    android:id="@+id/slash"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="/"
+                                    android:textSize="10sp" />
+
+                                <TextView
+                                    android:id="@+id/mois"
+                                    android:layout_width="60dp"
+                                    android:layout_height="wrap_content"
+                                    android:text="mm"
+                                    android:textSize="10sp" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rlCompteurTours"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="60dp"
+                android:layout_toRightOf="@+id/rlClignoGauche" >
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
+                </RelativeLayout>
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="300dp"
+                    android:layout_height="380dp"
+                    android:src="@drawable/compteurettour" />
+
+                <ImageView
+                    android:id="@+id/aiguilleTour"
+                    android:layout_width="wrap_content"
+                    android:layout_height="75dp"
+                    android:layout_marginLeft="116dp"
+                    android:layout_marginTop="190dp"
+                    android:src="@drawable/aiguille2" />
+
+                <RelativeLayout
+                    android:id="@+id/rlAiguille"
+                    android:layout_width="170dp"
+                    android:layout_height="170dp"
+                    android:layout_alignBottom="@+id/imageView2"
+                    android:layout_marginBottom="56dp"
+                    android:layout_marginRight="2dp"
+                    android:layout_toRightOf="@+id/aiguilleTour" >
+
+                    <ImageView
+                        android:id="@+id/aiguilleVitesse"
+                        android:layout_width="wrap_content"
+                        android:layout_height="75dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginBottom="10dp"
+                        android:src="@drawable/aiguille" />
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rlChanges"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true" >
+
+                <LinearLayout
+                    android:id="@+id/imagesBoutons"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" >
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" >
+
+                        <TextView
+                            android:id="@+id/tvNivBatterie"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="false"
+                            android:layout_alignParentStart="false"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignRight="@+id/imageView5"
+                            android:layout_marginRight="51dp"
+                            android:text="42%"
+                            android:textSize="25sp" />
+
+                        <ImageView
+                            android:id="@+id/imageView5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/niv_batterie" />
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="80dp"
+                            android:layout_alignLeft="@+id/tvNivBatterie"
+                            android:layout_alignRight="@+id/tvNivBatterie"
+                            android:layout_marginRight="12dp"
+                            android:layout_marginTop="54dp" >
+
+                            <LinearLayout
+                                android:layout_width="45dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:orientation="vertical" >
+
+                                <Button
+                                    android:id="@+id/button2"
+                                    style="?android:attr/buttonStyleSmall"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="15dp"
+                                    android:layout_marginBottom="2dp"
+                                    android:background="@color/blue" />
+
+                                <Button
+                                    android:id="@+id/button1"
+                                    style="?android:attr/buttonStyleSmall"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="18dp"
+                                    android:layout_marginBottom="2dp"
+                                    android:background="@color/blue" />
+
+                                <Button
+                                    android:id="@+id/button3"
+                                    style="?android:attr/buttonStyleSmall"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="18dp"
+                                    android:layout_marginBottom="2dp"
+                                    android:background="@color/blue" />
+
+                                <Button
+                                    android:id="@+id/button4"
+                                    style="?android:attr/buttonStyleSmall"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="18dp"
+                                    android:background="@color/blue" />
+
+                            </LinearLayout>
+
+                        </RelativeLayout>
+
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:id="@+id/boutons"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="10dp"
+                        android:paddingRight="10dp"
+                        android:paddingTop="20dp" >
+
+                        <Button
+                            android:id="@+id/btnA"
+                            style="?android:attr/buttonStyleSmall"
+                            android:layout_width="80dp"
+                            android:layout_height="50dp"
+                            android:layout_marginLeft="35dp"
+                            android:background="@color/blue"
+                            android:text="A"
+                            android:textSize="30sp" />
+
+                        <Button
+                            android:id="@+id/btnB"
+                            style="?android:attr/buttonStyleSmall"
+                            android:layout_width="80dp"
+                            android:layout_height="50dp"
+                            android:layout_marginLeft="25dp"
+                            android:background="@color/blue"
+                            android:text="B"
+                            android:textSize="30sp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+            </RelativeLayout>
+
+            <EditText
+                android:id="@+id/editTextVitesse"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/rlClignoGauche"
+                android:layout_toRightOf="@+id/rlClignoGauche"
+                android:ems="10"
+                android:inputType="number" />
+
+            <RelativeLayout
+                android:id="@+id/feux"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="350dp" >
+
+                <RelativeLayout
+                    android:id="@+id/phares"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:background="@color/white" >
+
+                    <ImageView
+                        android:id="@+id/imageView4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/route" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/croisement"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_marginLeft="73dp"
+                    android:background="@color/white" >
+
+                    <ImageView
+                        android:id="@+id/imageView3"
+                        android:layout_width="71dp"
+                        android:layout_height="71dp"
+                        android:src="@drawable/croisement" />
+                </RelativeLayout>
+            </RelativeLayout>
+
+        </RelativeLayout>
+</ScrollView>

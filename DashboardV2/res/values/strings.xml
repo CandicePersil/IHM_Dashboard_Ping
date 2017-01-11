@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Dashboard</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <color name="bck_color">#222222</color>
+    <color name="green">#01DF01</color>
+    <color name="white">#FFFFFF</color>
+    <color name="blue">#01A9DB</color>
+    <color name="orange">#FFA42A</color>
+
+</resources>
