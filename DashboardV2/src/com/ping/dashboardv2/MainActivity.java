@@ -10,7 +10,7 @@ import android.os.Handler;
 import android.view.*;
 import android.widget.*;
 
-
+//
 public class MainActivity extends Activity {
 
 	/*Création des variables*/
