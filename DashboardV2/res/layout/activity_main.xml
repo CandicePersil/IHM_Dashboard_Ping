@@ -263,33 +263,19 @@
                 android:layout_marginLeft="60dp"
                 android:layout_toRightOf="@+id/rlClignoGauche" >
 
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" >
-                </RelativeLayout>
-
                 <ImageView
-                    android:id="@+id/imageView2"
+                    android:id="@+id/compteurettour"
                     android:layout_width="300dp"
                     android:layout_height="380dp"
                     android:src="@drawable/compteurettour" />
-
-                <ImageView
-                    android:id="@+id/aiguilleTour"
-                    android:layout_width="wrap_content"
-                    android:layout_height="75dp"
-                    android:layout_marginLeft="116dp"
-                    android:layout_marginTop="190dp"
-                    android:src="@drawable/aiguille2" />
 
                 <RelativeLayout
                     android:id="@+id/rlAiguille"
                     android:layout_width="170dp"
                     android:layout_height="170dp"
-                    android:layout_alignBottom="@+id/imageView2"
+                    android:layout_alignBottom="@+id/compteurettour"
                     android:layout_marginBottom="56dp"
-                    android:layout_marginRight="2dp"
-                    android:layout_toRightOf="@+id/aiguilleTour" >
+                    android:layout_marginLeft="130dp" >
 
                     <ImageView
                         android:id="@+id/aiguilleVitesse"
@@ -299,6 +285,25 @@
                         android:layout_centerHorizontal="true"
                         android:layout_marginBottom="10dp"
                         android:src="@drawable/aiguille" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rlAiguilleTours"
+                    android:layout_width="235dp"
+                    android:layout_height="235dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="65dp" >
+
+                    <ImageView
+                        android:id="@+id/aiguilleTour"
+                        android:layout_width="wrap_content"
+                        android:layout_height="75dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginBottom="41dp"
+                        android:src="@drawable/aiguille2" />
 
                 </RelativeLayout>
 
@@ -354,7 +359,7 @@
                                 android:orientation="vertical" >
 
                                 <Button
-                                    android:id="@+id/button2"
+                                    android:id="@+id/niv4"
                                     style="?android:attr/buttonStyleSmall"
                                     android:layout_width="wrap_content"
                                     android:layout_height="15dp"
@@ -362,7 +367,7 @@
                                     android:background="@color/blue" />
 
                                 <Button
-                                    android:id="@+id/button1"
+                                    android:id="@+id/niv3"
                                     style="?android:attr/buttonStyleSmall"
                                     android:layout_width="wrap_content"
                                     android:layout_height="18dp"
@@ -370,7 +375,7 @@
                                     android:background="@color/blue" />
 
                                 <Button
-                                    android:id="@+id/button3"
+                                    android:id="@+id/niv2"
                                     style="?android:attr/buttonStyleSmall"
                                     android:layout_width="wrap_content"
                                     android:layout_height="18dp"
@@ -378,7 +383,7 @@
                                     android:background="@color/blue" />
 
                                 <Button
-                                    android:id="@+id/button4"
+                                    android:id="@+id/niv1"
                                     style="?android:attr/buttonStyleSmall"
                                     android:layout_width="fill_parent"
                                     android:layout_height="18dp"

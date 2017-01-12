@@ -41,5 +41,9 @@
 	<item android:id="@+id/itemTempLiquide"
 	    android:title="Voyant temp liquide"
 	    />
+	
+	<item android:id="@+id/itemBatteryLevel"
+	    android:title="Niveau de batterie"
+	    />
 
 </menu>

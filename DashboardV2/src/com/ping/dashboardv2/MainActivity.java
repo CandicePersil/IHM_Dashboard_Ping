@@ -32,16 +32,15 @@ public class MainActivity extends Activity {
 	private TextView jours;
 	private TextView mois;
 	private TextView slash;					//séparateur jours mois
-	private ImageView aiguilleVitesse;
-	private ImageView aiguille2;
+	private RelativeLayout rlAiguilleTours;
 	private TextView niveauBatterie;
 	private RelativeLayout rlAiguille;
-	private float angleVitesse;
 	
 	private boolean id_cligno;
 	private int nb_clic_gauche;
 	private int nb_clic_droit;
 	private int compteur_cligno;
+	private int compteur_batterie;
 	private int nb_clic_feux_croisement;
 	private int nb_clic_feux_route;
 	private int nb_clic_smiley;
@@ -49,16 +48,28 @@ public class MainActivity extends Activity {
 	private int nb_clic_huile;
 	private int nb_clic_tempHuile;
 	private int nb_clic_tempLiquide;
+	private int nb_clic_niveau_batterie;
+	private int niveau_batterie;
+	
+	private Button batterieNiveau1;
+	private Button batterieNiveau2;
+	private Button batterieNiveau3;
+	private Button batterieNiveau4;
 	
 	/*For tests only*/
 	private EditText etVitesse;
+	private EditText etBatterie;
 	private float fltVitesse;
+	private float fltTours;
+	private float angleVitesse;
+	private float angleTours;
 	
 	/*Fonctions*/
 	private Handler handler = new Handler();
 	private Runnable start;
 	private Runnable setup;
 	private Runnable clignoter;
+	private Runnable batterie_clignoter;
 	private Runnable attribuer_jour;
 	
 	
@@ -109,12 +120,15 @@ public class MainActivity extends Activity {
 		mois = (TextView)findViewById(R.id.mois);
 		slash = (TextView)findViewById(R.id.slash);
 		
-		aiguilleVitesse = (ImageView)findViewById(R.id.aiguilleVitesse);
-		
 		niveauBatterie = (TextView)findViewById(R.id.tvNivBatterie);
 		
 		rlAiguille = (RelativeLayout)findViewById(R.id.rlAiguille);
-		aiguille2 = (ImageView)findViewById(R.id.aiguilleTour);
+		rlAiguilleTours = (RelativeLayout)findViewById(R.id.rlAiguilleTours);
+		
+		batterieNiveau1 = (Button)findViewById(R.id.niv1); 					//1 - 24% + cligno entre 1 - 5%
+		batterieNiveau2 = (Button)findViewById(R.id.niv2);					//25 - 49%
+		batterieNiveau3 = (Button)findViewById(R.id.niv3);					//50 - 74%
+		batterieNiveau4 = (Button)findViewById(R.id.niv4);					//75 - 100%
 		
 		/*Test*/
 		etVitesse = (EditText)findViewById(R.id.editTextVitesse);
@@ -227,12 +241,15 @@ public class MainActivity extends Activity {
 				nb_clic_droit = 0;
 				nb_clic_smiley = 0;
 				compteur_cligno = 0;
+				compteur_batterie = 0;
 				nb_clic_feux_croisement = 0;
 				nb_clic_feux_route = 0;
 				nb_clic_batterie = 0;
 				nb_clic_huile = 0;
 				nb_clic_tempHuile = 0;
 				nb_clic_tempLiquide = 0;
+				nb_clic_niveau_batterie = 0;
+				niveau_batterie = 0;			//affichage du niveau de batterie
 			}
 		};
 		
@@ -298,20 +315,20 @@ public class MainActivity extends Activity {
 			}
 		};
 		
-	}
-	
-	public class RunnableParam implements Runnable{
+		batterie_clignoter = new Runnable(){
+			@Override
+			public void run(){
+				if (compteur_batterie%2 == 0){
+					batterieNiveau1.setVisibility(View.INVISIBLE);
+				}else{
+					batterieNiveau1.setVisibility(View.VISIBLE);
+				}
+				
+				handler.postDelayed(batterie_clignoter, 400);
+				compteur_batterie++;
+			}
+		};
 		
-		private int i;
-
-		public RunnableParam(int _i){
-			this.i = _i;
-		}
-		
-		@Override
-		public void run(){
-			aiguilleVitesse.setRotation(i);
-		}
 	}
 	
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -377,8 +394,8 @@ public class MainActivity extends Activity {
 			
 			case R.id.itemVitesses:
 				
-				aiguilleVitesse.setPivotX((rlAiguille.getWidth())/2);
-				aiguilleVitesse.setPivotY((rlAiguille.getHeight())/2);
+				rlAiguille.setPivotX((rlAiguille.getWidth())/2);
+				rlAiguille.setPivotY((rlAiguille.getHeight())/2);
 				
 				
 				fltVitesse = Float.valueOf(etVitesse.getText().toString());
@@ -386,20 +403,59 @@ public class MainActivity extends Activity {
 						
 				rlAiguille.setRotation(angleVitesse);
 				
-				aiguille2.setPivotX(aiguille2.getWidth());
-				aiguille2.setPivotY(aiguille2.getHeight());
+				rlAiguilleTours.setPivotX((rlAiguilleTours.getWidth())/2);
+				rlAiguilleTours.setPivotY((rlAiguilleTours.getHeight())/2);
 				
-				aiguille2.setRotation(fltVitesse);
+				fltTours = fltVitesse;
+				angleTours = 24 + 89 * fltTours / 3;
 				
+				rlAiguilleTours.setRotation(angleTours);
 				
-				/*int i;
+			case R.id.itemBatteryLevel:
 				
-				for (i=0; i<intVitesse; i++){
-					bouger_aiguille = new RunnableParam(i);
-					handler.postDelayed(bouger_aiguille, 50);
-				}*/
+				niveau_batterie = Integer.parseInt(etVitesse.getText().toString());
 				
-				
+				if (niveau_batterie == 0){
+					batterieNiveau1.setVisibility(View.INVISIBLE);
+					batterieNiveau2.setVisibility(View.INVISIBLE);
+					batterieNiveau3.setVisibility(View.INVISIBLE);
+					batterieNiveau4.setVisibility(View.INVISIBLE);
+				}
+				else if (niveau_batterie < 5){
+					batterieNiveau1.setVisibility(View.VISIBLE);
+					batterieNiveau2.setVisibility(View.INVISIBLE);
+					batterieNiveau3.setVisibility(View.INVISIBLE);
+					batterieNiveau4.setVisibility(View.INVISIBLE);
+					
+					handler.removeCallbacks(batterie_clignoter);
+				}
+				else if (niveau_batterie < 25){
+					batterieNiveau1.setVisibility(View.VISIBLE);
+					batterieNiveau2.setVisibility(View.INVISIBLE);
+					batterieNiveau3.setVisibility(View.INVISIBLE);
+					batterieNiveau4.setVisibility(View.INVISIBLE);
+				}
+				else if (niveau_batterie < 50){
+					batterieNiveau1.setVisibility(View.VISIBLE);
+					batterieNiveau2.setVisibility(View.VISIBLE);
+					batterieNiveau3.setVisibility(View.INVISIBLE);
+					batterieNiveau4.setVisibility(View.INVISIBLE);
+				}
+				else if (niveau_batterie < 75){
+					batterieNiveau1.setVisibility(View.VISIBLE);
+					batterieNiveau2.setVisibility(View.VISIBLE);
+					batterieNiveau3.setVisibility(View.VISIBLE);
+					batterieNiveau4.setVisibility(View.INVISIBLE);
+				}
+				else if (niveau_batterie < 101){
+					batterieNiveau1.setVisibility(View.VISIBLE);
+					batterieNiveau2.setVisibility(View.VISIBLE);
+					batterieNiveau3.setVisibility(View.VISIBLE);
+					batterieNiveau4.setVisibility(View.VISIBLE);
+				}
+				else{
+					
+				}
 				return true;
 			
 			case R.id.itemCroisement:
