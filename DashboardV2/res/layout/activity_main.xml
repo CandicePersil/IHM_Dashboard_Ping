@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mainLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@color/bck_color"
     tools:context="com.ping.dashboardv2.MainActivity" >
 
@@ -72,7 +72,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="25dp"
                                 android:layout_marginTop="15dp"
-                                android:text="3"
+                                android:text="1"
                                 android:textColor="#FFFFFF"
                                 android:textSize="56sp" />
 
@@ -427,14 +427,36 @@
                 </LinearLayout>
             </RelativeLayout>
 
-            <EditText
-                android:id="@+id/editTextVitesse"
-                android:layout_width="100dp"
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/rlClignoGauche"
-                android:layout_toRightOf="@+id/rlClignoGauche"
-                android:ems="10"
-                android:inputType="number" />
+                android:layout_alignParentLeft="false"
+                android:layout_centerHorizontal="false"
+                android:layout_centerInParent="false"
+                android:layout_marginStart="100dp" >
+
+                <EditText
+                    android:id="@+id/editTextVitesse"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:inputType="number"
+                    android:textColor="@color/white" >
+
+                    <requestFocus />
+                </EditText>
+
+                <EditText
+                    android:id="@+id/editTextBoiteVit"
+                    android:layout_width="130dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:inputType="number"
+                    android:textColor="@color/white" />
+
+            </LinearLayout>
 
             <RelativeLayout
                 android:id="@+id/feux"

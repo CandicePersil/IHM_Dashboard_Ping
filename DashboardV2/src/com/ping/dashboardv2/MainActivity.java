@@ -44,6 +44,7 @@ public class MainActivity extends Activity {
 	private int nb_clic_feux_croisement;
 	private int nb_clic_feux_route;
 	private int nb_clic_smiley;
+	private int nb_clic_point_mort;
 	private int nb_clic_batterie;
 	private int nb_clic_huile;
 	private int nb_clic_tempHuile;
@@ -58,6 +59,7 @@ public class MainActivity extends Activity {
 	
 	/*For tests only*/
 	private EditText etVitesse;
+	private EditText etBoiteVit;
 	private EditText etBatterie;
 	private float fltVitesse;
 	private float fltTours;
@@ -132,6 +134,7 @@ public class MainActivity extends Activity {
 		
 		/*Test*/
 		etVitesse = (EditText)findViewById(R.id.editTextVitesse);
+		etBoiteVit = (EditText)findViewById(R.id.editTextBoiteVit);
 		
 		vitesses.setTypeface(font);
 		pointMort.setTypeface(font);
@@ -202,7 +205,7 @@ public class MainActivity extends Activity {
 				
 				//Font
 				vitesses.setTextColor(getResources().getColor(R.color.blue));
-				pointMort.setTextColor(getResources().getColor(R.color.blue));
+				pointMort.setTextColor(getResources().getColor(R.color.green));
 				heures.setTextColor(getResources().getColor(R.color.blue));
 				minutes.setTextColor(getResources().getColor(R.color.blue));
 				deuxPoints.setTextColor(getResources().getColor(R.color.blue));
@@ -225,21 +228,27 @@ public class MainActivity extends Activity {
 				clignoGauche.setBackgroundResource(R.color.bck_color);
 				clignoDroit.setBackgroundResource(R.color.bck_color);
 				smiley.setBackgroundResource(R.color.bck_color);
+				pointMort.setVisibility(View.INVISIBLE);
 				batterie.setBackgroundResource(R.color.bck_color);
 				huile.setBackgroundResource(R.color.bck_color);
 				tempLiquide.setBackgroundResource(R.color.bck_color);
 				tempHuile.setBackgroundResource(R.color.bck_color);
 				feuxRoute.setBackgroundResource(R.color.bck_color);
 				feuxCroisement.setBackgroundResource(R.color.bck_color);
+				//met l'angle d'origine de la vitesse en Km à 0
 				fltVitesse = 0.0f;
 				angleVitesse = 45 + 135*fltVitesse/90;
 				rlAiguille.setRotation(angleVitesse);
-				
+				//met l'angle d'origine de la vitesse moteur en tr/min à 0
+				fltTours = 0.0f;
+				angleTours = 24 + 89 * fltTours / 3;
+				rlAiguilleTours.setRotation(angleTours);
 				
 				id_cligno = false;
 				nb_clic_gauche = 0;
 				nb_clic_droit = 0;
 				nb_clic_smiley = 0;
+				nb_clic_point_mort = 0;
 				compteur_cligno = 0;
 				compteur_batterie = 0;
 				nb_clic_feux_croisement = 0;
@@ -392,6 +401,16 @@ public class MainActivity extends Activity {
 				nb_clic_smiley++;	
 				return true;
 			
+			case R.id.itemPointMort:
+				if(nb_clic_point_mort%2 == 0){
+					pointMort.setVisibility(View.VISIBLE);
+				}
+				else{
+					pointMort.setVisibility(View.INVISIBLE);
+				}
+				nb_clic_point_mort++;
+				return true;
+				
 			case R.id.itemVitesses:
 				
 				rlAiguille.setPivotX((rlAiguille.getWidth())/2);
@@ -411,6 +430,18 @@ public class MainActivity extends Activity {
 				
 				rlAiguilleTours.setRotation(angleTours);
 				
+			/*case R.id.itemVitesseBoite:
+				//si le nombre rentré est entre 1 et 6 inclus c'est bon
+				// sinon message d'erreur
+				// dans le cas où c'est bon -> 
+				// si etBoiteVit == 1 on affiche change le 3 en 1 vitesses
+				// textView
+				if((Integer.valueOf(etBoiteVit.getText().toString()))>0 && (Integer.valueOf(etBoiteVit.getText().toString()))<=6){
+		           vitesses.setText(Integer.toString(Integer.valueOf(etBoiteVit.getText().toString())));
+				}
+				else
+					vitesses.setText(Integer.toString(0));
+			*/			
 			case R.id.itemBatteryLevel:
 				
 				niveau_batterie = Integer.parseInt(etVitesse.getText().toString());

@@ -14,8 +14,16 @@
     	 android:title="Smiley"
      />
 	
+	<item android:id="@+id/itemPointMort"
+	    android:title="Point mort"
+	/>
+	
 	<item android:id="@+id/itemVitesses"
     	 android:title="Vitesses"
+     />
+	
+	<item android:id="@+id/itemVitesseBoite"
+    	 android:title="Vitesse de la boîte"
      />
 	
 	<item android:id="@+id/itemCroisement"
