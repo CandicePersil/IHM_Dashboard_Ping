@@ -228,7 +228,8 @@ public class MainActivity extends Activity {
 				clignoGauche.setBackgroundResource(R.color.bck_color);
 				clignoDroit.setBackgroundResource(R.color.bck_color);
 				smiley.setBackgroundResource(R.color.bck_color);
-				pointMort.setVisibility(View.INVISIBLE);
+				vitesses.setVisibility(View.INVISIBLE);
+				pointMort.setVisibility(View.VISIBLE);
 				batterie.setBackgroundResource(R.color.bck_color);
 				huile.setBackgroundResource(R.color.bck_color);
 				tempLiquide.setBackgroundResource(R.color.bck_color);
@@ -404,6 +405,7 @@ public class MainActivity extends Activity {
 			case R.id.itemPointMort:
 				if(nb_clic_point_mort%2 == 0){
 					pointMort.setVisibility(View.VISIBLE);
+					vitesses.setVisibility(View.INVISIBLE);
 				}
 				else{
 					pointMort.setVisibility(View.INVISIBLE);
@@ -425,26 +427,48 @@ public class MainActivity extends Activity {
 				rlAiguilleTours.setPivotX((rlAiguilleTours.getWidth())/2);
 				rlAiguilleTours.setPivotY((rlAiguilleTours.getHeight())/2);
 				
+				// fltTours a calculer en fonction de numbVitBoite et de fltVitesse
+				/* si vitesse augmente, vitesse moteur egalement
+				 * mais si le numbVitBoite augmente, cela diminue la vitesse moteur
+				 * après dans les détails besoin des GET pour le poids de la moto, 
+				 * le diamètre des roues, le rayon etc...
+				 */
 				fltTours = fltVitesse;
 				angleTours = 24 + 89 * fltTours / 3;
 				
 				rlAiguilleTours.setRotation(angleTours);
+				return true;
 				
-			/*case R.id.itemVitesseBoite:
+			case R.id.itemVitesseBoite:
 				//si le nombre rentré est entre 1 et 6 inclus c'est bon
-				// sinon message d'erreur
+				// sinon on ne fait rien et on met un toast d'erreur
 				// dans le cas où c'est bon -> 
-				// si etBoiteVit == 1 on affiche change le 3 en 1 vitesses
-				// textView
-				if((Integer.valueOf(etBoiteVit.getText().toString()))>0 && (Integer.valueOf(etBoiteVit.getText().toString()))<=6){
-		           vitesses.setText(Integer.toString(Integer.valueOf(etBoiteVit.getText().toString())));
+				int numbVitBoite = Integer.parseInt(etBoiteVit.getText().toString());
+				String numbVitB = etBoiteVit.getText().toString();
+				if((numbVitBoite>=0) && (numbVitBoite<=6)){
+		           if(numbVitBoite==0){
+		        	   vitesses.setVisibility(View.INVISIBLE);
+		        	   pointMort.setVisibility(View.VISIBLE);
+		           }
+		           else{
+					   vitesses.setText(numbVitB);
+			           vitesses.setVisibility(View.VISIBLE);
+			           pointMort.setVisibility(View.INVISIBLE);
+		           }
 				}
-				else
-					vitesses.setText(Integer.toString(0));
-			*/			
+				else{
+					vitesses.setVisibility(View.INVISIBLE);
+					Toast.makeText(getApplicationContext(),
+                            "Valeur de boîte de vitesse impossible", Toast.LENGTH_LONG).show();
+					pointMort.setVisibility(View.VISIBLE);
+				}
+				return true;
+				
 			case R.id.itemBatteryLevel:
 				
 				niveau_batterie = Integer.parseInt(etVitesse.getText().toString());
+				String niveau_bat = etVitesse.getText().toString() + "%";
+				niveauBatterie.setText(niveau_bat);
 				
 				if (niveau_batterie == 0){
 					batterieNiveau1.setVisibility(View.INVISIBLE);
