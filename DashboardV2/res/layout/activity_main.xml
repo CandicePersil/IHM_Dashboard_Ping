@@ -333,63 +333,153 @@
                             android:layout_alignParentEnd="false"
                             android:layout_alignParentStart="false"
                             android:layout_alignParentTop="true"
-                            android:layout_alignRight="@+id/imageView5"
+                            android:layout_alignRight="@+id/nivBatterie"
                             android:layout_marginRight="51dp"
+                            android:layout_marginTop="120dp"
                             android:text="42%"
                             android:textSize="25sp" />
 
-                        <ImageView
-                            android:id="@+id/imageView5"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/niv_batterie" />
-
                         <RelativeLayout
+                            android:id="@+id/relativeLayout1"
                             android:layout_width="match_parent"
                             android:layout_height="80dp"
                             android:layout_alignLeft="@+id/tvNivBatterie"
                             android:layout_alignRight="@+id/tvNivBatterie"
                             android:layout_marginRight="12dp"
                             android:layout_marginTop="54dp" >
+                        </RelativeLayout>
 
-                            <LinearLayout
-                                android:layout_width="45dp"
+                        <ImageView
+                            android:id="@+id/nivBatterie"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_alignParentLeft="true"
+                            android:src="@drawable/niv_batterie" />
+
+                        <LinearLayout
+                            android:id="@+id/linearLayout2"
+                            android:layout_width="45dp"
+                            android:layout_height="wrap_content"
+                            android:layout_alignRight="@+id/tvNivBatterie"
+                            android:layout_below="@+id/relativeLayout1"
+                            android:layout_marginTop="40dp"
+                            android:orientation="vertical" >
+
+                            <Button
+                                android:id="@+id/niv4"
+                                style="?android:attr/buttonStyleSmall"
+                                android:layout_width="wrap_content"
+                                android:layout_height="15dp"
+                                android:layout_marginBottom="2dp"
+                                android:background="@color/blue" />
+
+                            <Button
+                                android:id="@+id/niv3"
+                                style="?android:attr/buttonStyleSmall"
+                                android:layout_width="wrap_content"
+                                android:layout_height="18dp"
+                                android:layout_marginBottom="2dp"
+                                android:background="@color/blue" />
+
+                            <Button
+                                android:id="@+id/niv2"
+                                style="?android:attr/buttonStyleSmall"
+                                android:layout_width="wrap_content"
+                                android:layout_height="18dp"
+                                android:layout_marginBottom="2dp"
+                                android:background="@color/blue" />
+
+                            <Button
+                                android:id="@+id/niv1"
+                                style="?android:attr/buttonStyleSmall"
+                                android:layout_width="fill_parent"
+                                android:layout_height="18dp"
+                                android:background="@color/blue" />
+                        </LinearLayout>
+
+                        <ImageView
+                            android:id="@+id/barre"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:layout_marginLeft="42dp"
+                            android:layout_toRightOf="@+id/relativeLayout1"
+                            android:src="@drawable/barre" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignBottom="@+id/linearLayout2"
+                            android:layout_marginLeft="5dp"
+                            android:layout_toRightOf="@+id/nivBatterie"
+                            android:orientation="vertical" >
+
+                            <Button
+                                android:id="@+id/essenceNiv6"
+                                android:layout_width="wrap_content"
+                                android:layout_height="35dp"
+                                android:layout_marginBottom="5dp"
+                                android:background="@color/blue" />
+
+                            <Button
+                                android:id="@+id/essenceNiv5"
+                                android:layout_width="wrap_content"
+                                android:layout_height="35dp"
+                                android:layout_marginBottom="5dp"
+                                android:background="@color/blue" />
+
+                            <Button
+                                android:id="@+id/essenceNiv4"
+                                android:layout_width="wrap_content"
+                                android:layout_height="35dp"
+                                android:layout_marginBottom="5dp"
+                                android:background="@color/blue" />
+
+                            <Button
+                                android:id="@+id/essenceNiv3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="35dp"
+                                android:layout_marginBottom="5dp"
+                                android:background="@color/blue" />
+
+                            <Button
+                                android:id="@+id/essenceNiv2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="35dp"
+                                android:layout_marginBottom="5dp"
+                                android:background="@color/blue" />
+
+                            <Button
+                                android:id="@+id/essenceNiv1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="35dp"
+                                android:background="@color/blue" />
+
+                        </LinearLayout>
+
+                        <ImageView
+                            android:id="@+id/essenceBleue"
+                            android:layout_width="70dp"
+                            android:layout_height="70dp"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignRight="@+id/nivBatterie"
+                            android:layout_marginRight="10dp"
+                            android:layout_marginTop="10dp"
+                            android:src="@drawable/essence_bleu" />
+
+                        <RelativeLayout
+                            android:id="@+id/rlEssence"
+                            android:layout_width="70dp"
+                            android:layout_height="70dp"
+                            android:layout_marginTop="10dp"
+                            android:background="@color/orange" >
+
+                            <ImageView
+                                android:id="@+id/imageView2"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="5dp"
-                                android:orientation="vertical" >
-
-                                <Button
-                                    android:id="@+id/niv4"
-                                    style="?android:attr/buttonStyleSmall"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="15dp"
-                                    android:layout_marginBottom="2dp"
-                                    android:background="@color/blue" />
-
-                                <Button
-                                    android:id="@+id/niv3"
-                                    style="?android:attr/buttonStyleSmall"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="18dp"
-                                    android:layout_marginBottom="2dp"
-                                    android:background="@color/blue" />
-
-                                <Button
-                                    android:id="@+id/niv2"
-                                    style="?android:attr/buttonStyleSmall"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="18dp"
-                                    android:layout_marginBottom="2dp"
-                                    android:background="@color/blue" />
-
-                                <Button
-                                    android:id="@+id/niv1"
-                                    style="?android:attr/buttonStyleSmall"
-                                    android:layout_width="fill_parent"
-                                    android:layout_height="18dp"
-                                    android:background="@color/blue" />
-
-                            </LinearLayout>
+                                android:src="@drawable/essence" />
 
                         </RelativeLayout>
 
@@ -442,6 +532,7 @@
                     android:layout_weight="1"
                     android:ems="10"
                     android:inputType="number"
+                    android:text="0"
                     android:textColor="@color/white" >
 
                     <requestFocus />
@@ -454,6 +545,7 @@
                     android:layout_weight="1"
                     android:ems="10"
                     android:inputType="number"
+                    android:text="0"
                     android:textColor="@color/white" />
 
             </LinearLayout>

@@ -53,5 +53,10 @@
 	<item android:id="@+id/itemBatteryLevel"
 	    android:title="Niveau de batterie"
 	    />
-
+	
+	<item android:id="@+id/itemOilLevel"
+		android:title="Plus d'essence"/>
+	
+	<item android:id="@+id/itemNiveauEssence"
+	    android:title="Niveau d'essence"/>
 </menu>

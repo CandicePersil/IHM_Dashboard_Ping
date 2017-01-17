@@ -14,27 +14,28 @@ import android.widget.*;
 public class MainActivity extends Activity {
 
 	/*Création des variables*/
-	private RelativeLayout clignoGauche;
-	private RelativeLayout clignoDroit;
-	private RelativeLayout smiley; 			//smiley de conso
-	private RelativeLayout huile;			//niveau d'huile
-	private RelativeLayout tempLiquide;		//temperature liquide de refroidissement
-	private RelativeLayout tempHuile;		//temperature huile moteur
-	private RelativeLayout batterie;		//voyant batterie moteur
-	private RelativeLayout feuxRoute;
-	private RelativeLayout feuxCroisement;
-	private TextView vitesses;				//vitesses passées par le motard
-	private TextView pointMort;				//voyant point mort
-	private TextView heures;				
-	private TextView minutes;
-	private TextView deuxPoints;			//séparateur heures minutes
-	private TextView joursLettres;
-	private TextView jours;
-	private TextView mois;
-	private TextView slash;					//séparateur jours mois
-	private RelativeLayout rlAiguilleTours;
-	private TextView niveauBatterie;
-	private RelativeLayout rlAiguille;
+	private RelativeLayout 	clignoGauche;
+	private RelativeLayout 	clignoDroit;
+	private RelativeLayout 	smiley; 			//smiley de conso
+	private RelativeLayout 	huile;				//niveau d'huile
+	private RelativeLayout 	tempLiquide;		//temperature liquide de refroidissement
+	private RelativeLayout 	tempHuile;			//temperature huile moteur
+	private RelativeLayout 	batterie;			//voyant batterie moteur
+	private RelativeLayout 	feuxRoute;
+	private RelativeLayout 	feuxCroisement;
+	private RelativeLayout 	essence;
+	private TextView 		vitesses;			//vitesses passées par le motard
+	private TextView 		pointMort;			//voyant point mort
+	private TextView 		heures;				
+	private TextView 		minutes;
+	private TextView 		deuxPoints;			//séparateur heures minutes
+	private TextView 		joursLettres;
+	private TextView 		jours;
+	private TextView 		mois;
+	private TextView 		slash;				//séparateur jours mois
+	private RelativeLayout 	rlAiguilleTours;
+	private TextView 		niveauBatterie;
+	private RelativeLayout 	rlAiguille;
 	
 	private boolean id_cligno;
 	private int nb_clic_gauche;
@@ -49,18 +50,25 @@ public class MainActivity extends Activity {
 	private int nb_clic_huile;
 	private int nb_clic_tempHuile;
 	private int nb_clic_tempLiquide;
-	private int nb_clic_niveau_batterie;
 	private int niveau_batterie;
+	private int niveau_essence;
+	private int nb_clic_essence;
 	
 	private Button batterieNiveau1;
 	private Button batterieNiveau2;
 	private Button batterieNiveau3;
 	private Button batterieNiveau4;
 	
+	private Button essenceNiveau1;
+	private Button essenceNiveau2;
+	private Button essenceNiveau3;
+	private Button essenceNiveau4;
+	private Button essenceNiveau5;
+	private Button essenceNiveau6;
+	
 	/*For tests only*/
 	private EditText etVitesse;
 	private EditText etBoiteVit;
-	private EditText etBatterie;
 	private float fltVitesse;
 	private float fltTours;
 	private float angleVitesse;
@@ -93,6 +101,8 @@ public class MainActivity extends Activity {
 		
 		/*Forcer l'application en mode paysage*/
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);	
+		/*Forcer l'écran à rester allumé*/
+		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		
 		//font spéciale
 		Typeface font = Typeface.createFromAsset(getAssets(), "ds_digi.ttf");
@@ -106,6 +116,7 @@ public class MainActivity extends Activity {
 		tempHuile = (RelativeLayout)findViewById(R.id.rlTempHuile);
 		tempLiquide = (RelativeLayout)findViewById(R.id.rlTempLiquide);
 		huile = (RelativeLayout)findViewById(R.id.rlHuile);
+		essence = (RelativeLayout)findViewById(R.id.rlEssence);
 		
 		feuxCroisement = (RelativeLayout)findViewById(R.id.croisement);
 		feuxRoute = (RelativeLayout)findViewById(R.id.phares);
@@ -131,6 +142,13 @@ public class MainActivity extends Activity {
 		batterieNiveau2 = (Button)findViewById(R.id.niv2);					//25 - 49%
 		batterieNiveau3 = (Button)findViewById(R.id.niv3);					//50 - 74%
 		batterieNiveau4 = (Button)findViewById(R.id.niv4);					//75 - 100%
+		
+		essenceNiveau1 = (Button)findViewById(R.id.essenceNiv1);
+		essenceNiveau2 = (Button)findViewById(R.id.essenceNiv2);
+		essenceNiveau3 = (Button)findViewById(R.id.essenceNiv3);
+		essenceNiveau4 = (Button)findViewById(R.id.essenceNiv4);
+		essenceNiveau5 = (Button)findViewById(R.id.essenceNiv5);
+		essenceNiveau6 = (Button)findViewById(R.id.essenceNiv6);
 		
 		/*Test*/
 		etVitesse = (EditText)findViewById(R.id.editTextVitesse);
@@ -202,6 +220,7 @@ public class MainActivity extends Activity {
 				tempHuile.setBackgroundResource(R.color.orange);
 				feuxRoute.setBackgroundResource(R.color.blue);
 				feuxCroisement.setBackgroundResource(R.color.green);
+				essence.setBackgroundResource(R.color.orange);
 				
 				//Font
 				vitesses.setTextColor(getResources().getColor(R.color.blue));
@@ -236,6 +255,7 @@ public class MainActivity extends Activity {
 				tempHuile.setBackgroundResource(R.color.bck_color);
 				feuxRoute.setBackgroundResource(R.color.bck_color);
 				feuxCroisement.setBackgroundResource(R.color.bck_color);
+				essence.setBackgroundResource(R.color.bck_color);
 				//met l'angle d'origine de la vitesse en Km à 0
 				fltVitesse = 0.0f;
 				angleVitesse = 45 + 135*fltVitesse/90;
@@ -258,8 +278,8 @@ public class MainActivity extends Activity {
 				nb_clic_huile = 0;
 				nb_clic_tempHuile = 0;
 				nb_clic_tempLiquide = 0;
-				nb_clic_niveau_batterie = 0;
 				niveau_batterie = 0;			//affichage du niveau de batterie
+				nb_clic_essence = 0;
 			}
 		};
 		
@@ -482,7 +502,8 @@ public class MainActivity extends Activity {
 					batterieNiveau3.setVisibility(View.INVISIBLE);
 					batterieNiveau4.setVisibility(View.INVISIBLE);
 					
-					handler.removeCallbacks(batterie_clignoter);
+					//handler.removeCallbacks(batterie_clignoter);
+					//TODO Faire clignoter le layout
 				}
 				else if (niveau_batterie < 25){
 					batterieNiveau1.setVisibility(View.VISIBLE);
@@ -509,8 +530,74 @@ public class MainActivity extends Activity {
 					batterieNiveau4.setVisibility(View.VISIBLE);
 				}
 				else{
+					niveauBatterie.setText("?");
+				}
+				return true;
+				
+				
+			case R.id.itemNiveauEssence:
+				niveau_essence = Integer.parseInt(etVitesse.getText().toString());
+				
+				if (niveau_essence == 0){
+					essenceNiveau1.setVisibility(View.INVISIBLE);
+					essenceNiveau2.setVisibility(View.INVISIBLE);
+					essenceNiveau3.setVisibility(View.INVISIBLE);
+					essenceNiveau4.setVisibility(View.INVISIBLE);
+					essenceNiveau5.setVisibility(View.INVISIBLE);
+					essenceNiveau6.setVisibility(View.INVISIBLE);
+				}
+				else if (niveau_essence < 16){
+					essenceNiveau1.setVisibility(View.VISIBLE);
+					essenceNiveau2.setVisibility(View.INVISIBLE);
+					essenceNiveau3.setVisibility(View.INVISIBLE);
+					essenceNiveau4.setVisibility(View.INVISIBLE);
+					essenceNiveau5.setVisibility(View.INVISIBLE);
+					essenceNiveau6.setVisibility(View.INVISIBLE);
+				}
+				else if (niveau_essence < 33){
+					essenceNiveau1.setVisibility(View.VISIBLE);
+					essenceNiveau2.setVisibility(View.VISIBLE);
+					essenceNiveau3.setVisibility(View.INVISIBLE);
+					essenceNiveau4.setVisibility(View.INVISIBLE);
+					essenceNiveau5.setVisibility(View.INVISIBLE);
+					essenceNiveau6.setVisibility(View.INVISIBLE);
+				}
+				else if (niveau_essence < 50){
+					essenceNiveau1.setVisibility(View.VISIBLE);
+					essenceNiveau2.setVisibility(View.VISIBLE);
+					essenceNiveau3.setVisibility(View.VISIBLE);
+					essenceNiveau4.setVisibility(View.INVISIBLE);
+					essenceNiveau5.setVisibility(View.INVISIBLE);
+					essenceNiveau6.setVisibility(View.INVISIBLE);
+				}
+				else if (niveau_essence < 67){
+					essenceNiveau1.setVisibility(View.VISIBLE);
+					essenceNiveau2.setVisibility(View.VISIBLE);
+					essenceNiveau3.setVisibility(View.VISIBLE);
+					essenceNiveau4.setVisibility(View.VISIBLE);
+					essenceNiveau5.setVisibility(View.INVISIBLE);
+					essenceNiveau6.setVisibility(View.INVISIBLE);
+				}
+				else if (niveau_essence < 75){
+					essenceNiveau1.setVisibility(View.VISIBLE);
+					essenceNiveau2.setVisibility(View.VISIBLE);
+					essenceNiveau3.setVisibility(View.VISIBLE);
+					essenceNiveau4.setVisibility(View.VISIBLE);
+					essenceNiveau5.setVisibility(View.VISIBLE);
+					essenceNiveau6.setVisibility(View.INVISIBLE);
+				}
+				else if (niveau_essence < 101){
+					essenceNiveau1.setVisibility(View.VISIBLE);
+					essenceNiveau2.setVisibility(View.VISIBLE);
+					essenceNiveau3.setVisibility(View.VISIBLE);
+					essenceNiveau4.setVisibility(View.VISIBLE);
+					essenceNiveau5.setVisibility(View.VISIBLE);
+					essenceNiveau6.setVisibility(View.VISIBLE);
+				}
+				else{
 					
 				}
+				
 				return true;
 			
 			case R.id.itemCroisement:
@@ -571,6 +658,16 @@ public class MainActivity extends Activity {
 					tempLiquide.setBackgroundResource(R.color.bck_color);
 				}
 				nb_clic_tempLiquide++;
+				return true;
+				
+			case R.id.itemOilLevel:
+				if (nb_clic_essence%2 == 0){
+					essence.setBackgroundResource(R.color.orange);
+				}
+				else{
+					essence.setBackgroundResource(R.color.bck_color);
+				}
+				nb_clic_essence++;
 				return true;
 		}
 		
