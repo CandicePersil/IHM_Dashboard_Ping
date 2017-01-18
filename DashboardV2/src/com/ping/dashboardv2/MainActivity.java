@@ -489,6 +489,8 @@ public class MainActivity extends Activity {
 				if(nb_clic_point_mort%2 == 0){
 					pointMort.setVisibility(View.VISIBLE);
 					vitesses.setVisibility(View.INVISIBLE);
+					rlAiguille.setRotation(45);
+					rlAiguilleTours.setRotation(24);
 				}
 				else{
 					pointMort.setVisibility(View.INVISIBLE);
@@ -497,29 +499,34 @@ public class MainActivity extends Activity {
 				return true;
 				
 			case R.id.itemVitesses:
-				
-				rlAiguille.setPivotX((rlAiguille.getWidth())/2);
-				rlAiguille.setPivotY((rlAiguille.getHeight())/2);
-				
-				
-				fltVitesse = Float.valueOf(etVitesse.getText().toString());
-				angleVitesse = 45 + 135*fltVitesse/90;
-						
-				rlAiguille.setRotation(angleVitesse);
-				
-				rlAiguilleTours.setPivotX((rlAiguilleTours.getWidth())/2);
-				rlAiguilleTours.setPivotY((rlAiguilleTours.getHeight())/2);
-				
-				// fltTours a calculer en fonction de numbVitBoite et de fltVitesse
-				/* si vitesse augmente, vitesse moteur egalement
-				 * mais si le numbVitBoite augmente, cela diminue la vitesse moteur
-				 * après dans les détails besoin des GET pour le poids de la moto, 
-				 * le diamètre des roues, le rayon etc...
-				 */
-				fltTours = fltVitesse;
-				angleTours = 24 + 89 * fltTours / 3;
-				
-				rlAiguilleTours.setRotation(angleTours);
+				if(pointMort.getVisibility()==4){
+					rlAiguille.setPivotX((rlAiguille.getWidth())/2);
+					rlAiguille.setPivotY((rlAiguille.getHeight())/2);
+					
+					
+					fltVitesse = Float.valueOf(etVitesse.getText().toString());
+					angleVitesse = 45 + 135*fltVitesse/90;
+							
+					rlAiguille.setRotation(angleVitesse);
+					
+					rlAiguilleTours.setPivotX((rlAiguilleTours.getWidth())/2);
+					rlAiguilleTours.setPivotY((rlAiguilleTours.getHeight())/2);
+					
+					// fltTours a calculer en fonction de numbVitBoite et de fltVitesse
+					/* si vitesse augmente, vitesse moteur egalement
+					 * mais si le numbVitBoite augmente, cela diminue la vitesse moteur
+					 * après dans les détails besoin des GET pour le poids de la moto, 
+					 * le diamètre des roues, le rayon etc...
+					 */
+					fltTours = fltVitesse;
+					angleTours = 24 + 89 * fltTours / 3;
+					
+					rlAiguilleTours.setRotation(angleTours);
+				}
+				else{
+					Toast.makeText(getApplicationContext(),
+                            "Noubliez pas le frein à main avant de démarrer !", Toast.LENGTH_LONG).show();
+				}
 				return true;
 				
 			case R.id.itemVitesseBoite:
