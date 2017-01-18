@@ -323,8 +323,10 @@
                     android:orientation="vertical" >
 
                     <RelativeLayout
+                        android:id="@+id/ecran1"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" >
+                        android:layout_height="wrap_content"
+                        android:visibility="gone" >
 
                         <TextView
                             android:id="@+id/tvNivBatterie"
@@ -482,6 +484,128 @@
                                 android:src="@drawable/essence" />
 
                         </RelativeLayout>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/ecran2"
+                        android:layout_width="match_parent"
+                        android:layout_height="250dp" >
+
+                        <LinearLayout
+                            android:id="@+id/ecritures"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="42dp"
+                            android:orientation="vertical" >
+
+                            <RelativeLayout
+                                android:layout_width="70dp"
+                                android:layout_height="70dp"
+                                android:layout_marginBottom="20dp"
+                                android:background="@color/orange" >
+
+                                <ImageView
+                                    android:id="@+id/imageView7"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_centerVertical="true"
+                                    android:src="@drawable/essence" />
+
+                            </RelativeLayout>
+
+                            <LinearLayout
+                                android:id="@+id/repartition"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="10dp"
+                                android:orientation="horizontal" >
+
+                                <RelativeLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent" >
+
+                                    <Button
+                                        android:id="@+id/repEssence"
+                                        android:layout_width="40dp"
+                                        android:layout_height="40dp"
+                                        android:background="@color/blue" />
+
+                                    <ImageView
+                                        android:id="@+id/imageView5"
+                                        android:layout_width="40dp"
+                                        android:layout_height="40dp"
+                                        android:layout_alignParentLeft="true"
+                                        android:layout_alignParentTop="true"
+                                        android:src="@drawable/essence" />
+
+                                </RelativeLayout>
+
+                                <RelativeLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent" >
+
+                                    <Button
+                                        android:id="@+id/repBatterie"
+                                        android:layout_width="140dp"
+                                        android:layout_height="40dp"
+                                        android:layout_marginLeft="10dp"
+                                        android:background="@color/blue" />
+
+                                    <ImageView
+                                        android:id="@+id/imageView6"
+                                        android:layout_width="40dp"
+                                        android:layout_height="40dp"
+                                        android:layout_alignParentRight="true"
+                                        android:layout_alignParentTop="true"
+                                        android:src="@drawable/batterie_noire" />
+
+                                </RelativeLayout>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" >
+
+                                <TextView
+                                    android:id="@+id/tvKmDepuisPlein"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="22"
+                                    android:textSize="42sp" />
+
+                                <TextView
+                                    android:id="@+id/km"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="km"
+                                    android:textSize="20sp" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" >
+
+                                <TextView
+                                    android:id="@+id/tvLitres"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="45000"
+                                    android:textSize="42sp" />
+
+                                <TextView
+                                    android:id="@+id/litresAuCent"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="L/100km"
+                                    android:textSize="20sp" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
 
                     </RelativeLayout>
 

@@ -7,6 +7,7 @@ import android.content.pm.ActivityInfo;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.*;
 import android.widget.*;
 
@@ -36,6 +37,18 @@ public class MainActivity extends Activity {
 	private RelativeLayout 	rlAiguilleTours;
 	private TextView 		niveauBatterie;
 	private RelativeLayout 	rlAiguille;
+	
+	/*Ecran 2*/
+	private TextView 		kmDepuisPlein;
+	private TextView		tvKm;
+	private TextView 		litresAuCent;
+	private TextView		tvLitres;
+	
+	private RelativeLayout 	ecran1;
+	private RelativeLayout 	ecran2;
+	
+	private Button 	boutonA;
+	private int nb_clic_boutonA;
 	
 	private boolean id_cligno;
 	private int nb_clic_gauche;
@@ -150,6 +163,17 @@ public class MainActivity extends Activity {
 		essenceNiveau5 = (Button)findViewById(R.id.essenceNiv5);
 		essenceNiveau6 = (Button)findViewById(R.id.essenceNiv6);
 		
+		ecran1 = (RelativeLayout)findViewById(R.id.ecran1);
+		ecran2 = (RelativeLayout)findViewById(R.id.ecran2);
+		
+		/*Ecran 2*/
+		kmDepuisPlein = (TextView)findViewById(R.id.tvKmDepuisPlein);
+		tvKm = (TextView)findViewById(R.id.km);
+		litresAuCent = (TextView)findViewById(R.id.litresAuCent);
+		tvLitres = (TextView)findViewById(R.id.tvLitres);
+		
+		boutonA = (Button)findViewById(R.id.btnA);
+		
 		/*Test*/
 		etVitesse = (EditText)findViewById(R.id.editTextVitesse);
 		etBoiteVit = (EditText)findViewById(R.id.editTextBoiteVit);
@@ -164,6 +188,11 @@ public class MainActivity extends Activity {
 		mois.setTypeface(font);
 		slash.setTypeface(font);
 		niveauBatterie.setTypeface(font);
+		
+		kmDepuisPlein.setTypeface(font);
+		tvKm.setTypeface(font);
+		litresAuCent.setTypeface(font);
+		tvLitres.setTypeface(font);
 		
 		attribuer_jour = new Runnable(){
 			@Override
@@ -233,7 +262,15 @@ public class MainActivity extends Activity {
 				mois.setTextColor(getResources().getColor(R.color.blue));
 				slash.setTextColor(getResources().getColor(R.color.blue));
 				
+				kmDepuisPlein.setTextColor(getResources().getColor(R.color.blue));
+				tvKm.setTextColor(getResources().getColor(R.color.blue));
+				litresAuCent.setTextColor(getResources().getColor(R.color.blue));
+				tvLitres.setTextColor(getResources().getColor(R.color.blue));
+				
 				niveauBatterie.setTextColor(getResources().getColor(R.color.blue));
+				
+				ecran1.setVisibility(View.VISIBLE);
+				ecran2.setVisibility(View.GONE);
 
 				handler.postDelayed(setup, 2000);
 			}
@@ -280,6 +317,7 @@ public class MainActivity extends Activity {
 				nb_clic_tempLiquide = 0;
 				niveau_batterie = 0;			//affichage du niveau de batterie
 				nb_clic_essence = 0;
+				nb_clic_boutonA = 0;
 			}
 		};
 		
@@ -358,6 +396,31 @@ public class MainActivity extends Activity {
 				compteur_batterie++;
 			}
 		};
+		
+		boutonA.setOnClickListener(
+				new View.OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						switch (nb_clic_boutonA){
+						
+							case 0:
+								ecran1.setVisibility(View.GONE);
+								ecran2.setVisibility(View.VISIBLE);
+								nb_clic_boutonA++;
+								break;
+								
+							case 1:
+								ecran1.setVisibility(View.VISIBLE);
+								ecran2.setVisibility(View.GONE);
+								nb_clic_boutonA = 0; //Retour au début 
+								break;
+								
+						}
+					}
+				}
+				
+		);
 		
 	}
 	
