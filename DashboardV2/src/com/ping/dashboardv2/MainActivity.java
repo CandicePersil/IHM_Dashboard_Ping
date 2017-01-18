@@ -489,6 +489,7 @@ public class MainActivity extends Activity {
 				if(nb_clic_point_mort%2 == 0){
 					pointMort.setVisibility(View.VISIBLE);
 					vitesses.setVisibility(View.INVISIBLE);
+					//il n'y a plus de mouvement du véhicule
 					rlAiguille.setRotation(45);
 					rlAiguilleTours.setRotation(24);
 				}
@@ -499,6 +500,8 @@ public class MainActivity extends Activity {
 				return true;
 				
 			case R.id.itemVitesses:
+				//pointMort.getVisibility()==4 -> point mort invisible
+				//pointMort.getVisibility()==0 -> point mort visible
 				if(pointMort.getVisibility()==4){
 					rlAiguille.setPivotX((rlAiguille.getWidth())/2);
 					rlAiguille.setPivotY((rlAiguille.getHeight())/2);
