@@ -490,7 +490,8 @@
                     <RelativeLayout
                         android:id="@+id/ecran2"
                         android:layout_width="match_parent"
-                        android:layout_height="250dp" >
+                        android:layout_height="250dp"
+                        android:visibility="gone" >
 
                         <LinearLayout
                             android:id="@+id/ecritures"
@@ -602,6 +603,269 @@
                                     android:layout_height="wrap_content"
                                     android:text="L/100km"
                                     android:textSize="20sp" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/ecran3"
+                        android:layout_width="match_parent"
+                        android:layout_height="250dp"
+                        android:visibility="gone" >
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:orientation="vertical" >
+
+                            <RelativeLayout
+                                android:layout_width="70dp"
+                                android:layout_height="70dp"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginBottom="10dp"
+                                android:background="@color/orange" >
+
+                                <ImageView
+                                    android:id="@+id/imageView10"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/essence" />
+
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:layout_width="100dp"
+                                android:layout_height="100dp"
+                                android:layout_gravity="center_horizontal" >
+
+                                <Button
+                                    android:id="@+id/repVertBatterie"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="fill_parent"
+                                    android:background="@color/blue" />
+
+                                <ImageView
+                                    android:id="@+id/imageView8"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:layout_alignParentBottom="true"
+                                    android:layout_alignParentLeft="true"
+                                    android:src="@drawable/batterie_noire" />
+
+                                <TextView
+                                    android:id="@+id/tvRepartBatterie"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentBottom="true"
+                                    android:layout_alignParentRight="true"
+                                    android:text="75%"
+                                    android:textColor="@color/bck_color"
+                                    android:textSize="22sp" />
+
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:layout_width="100dp"
+                                android:layout_height="50dp"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginTop="10dp" >
+
+                                <Button
+                                    android:id="@+id/repVertEssence"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="fill_parent"
+                                    android:background="@color/blue" />
+
+                                <TextView
+                                    android:id="@+id/tvRepartEssence"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentBottom="true"
+                                    android:layout_alignParentRight="true"
+                                    android:text="15%"
+                                    android:textColor="@color/bck_color"
+                                    android:textSize="22sp" />
+
+                                <ImageView
+                                    android:id="@+id/imageView9"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:layout_alignParentBottom="true"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_marginLeft="5dp"
+                                    android:src="@drawable/essence" />
+
+                            </RelativeLayout>
+
+                        </LinearLayout>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/ecran4"
+                        android:layout_width="match_parent"
+                        android:layout_height="250dp"
+                        android:visibility="gone" >
+
+                        <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="30dp"
+                            android:orientation="vertical" >
+
+                            <RelativeLayout
+                                android:layout_width="70dp"
+                                android:layout_height="70dp"
+                                android:layout_gravity="center_horizontal"
+                                android:background="@color/orange" >
+
+                                <ImageView
+                                    android:id="@+id/imageView11"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="fill_parent"
+                                    android:src="@drawable/essence" />
+                            </RelativeLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:gravity="center_horizontal" >
+
+                                <TextView
+                                    android:id="@+id/kilometrage"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="22"
+                                    android:textSize="40sp" />
+
+                                <TextView
+                                    android:id="@+id/tvKmetrage"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="km"
+                                    android:textSize="22sp" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_horizontal" >
+
+                                <TextView
+                                    android:id="@+id/litresAuCent4"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="5"
+                                    android:textSize="40sp" />
+
+                                <TextView
+                                    android:id="@+id/tvLAC"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="L/100km"
+                                    android:textSize="22sp" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" >
+
+                                <TextView
+                                    android:id="@+id/tvLACAvg"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="3,5"
+                                    android:textSize="40sp" />
+
+                                <TextView
+                                    android:id="@+id/LACAVG"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="L/100km AVG"
+                                    android:textSize="22sp" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/ecran5"
+                        android:layout_width="match_parent"
+                        android:layout_height="250dp" >
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="30dp"
+                            android:orientation="vertical" >
+
+                            <RelativeLayout
+                                android:layout_width="70dp"
+                                android:layout_height="70dp"
+                                android:layout_gravity="center_horizontal"
+                                android:background="@color/orange" >
+
+                                <ImageView
+                                    android:id="@+id/imageView13"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_centerVertical="true"
+                                    android:src="@drawable/essence" />
+
+                            </RelativeLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" >
+
+                                <TextView
+                                    android:id="@+id/LAC5"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="3,5"
+                                    android:textSize="40sp" />
+
+                                <TextView
+                                    android:id="@+id/tvLAC5"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="L/100km AVG"
+                                    android:textSize="22sp" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" >
+
+                                <TextView
+                                    android:id="@+id/kmToPompe"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="150"
+                                    android:textSize="40sp" />
+
+                                <TextView
+                                    android:id="@+id/tvKmToPompe"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="km......."
+                                    android:textSize="22sp" />
+
+                                <ImageView
+                                    android:id="@+id/imageView12"
+                                    android:layout_width="40dp"
+                                    android:layout_height="40dp"
+                                    android:src="@drawable/essence_bleu" />
 
                             </LinearLayout>
 

@@ -44,8 +44,25 @@ public class MainActivity extends Activity {
 	private TextView 		litresAuCent;
 	private TextView		tvLitres;
 	
+	/*Ecran 4*/
+	private TextView		kilometrage;
+	private TextView		tvKilometrage;
+	private TextView 		kmLAC; 				//Litres au cent
+	private TextView		tvKmLAC;
+	private TextView		kmLACAVG; 			//average
+	private TextView		tvKmLACAVG;
+	
+	/*Ecran 5*/
+	private TextView 		kmLAC5;
+	private TextView		tvKmLAC5;
+	private TextView 		kmToPompe;
+	private TextView		tvKmToPompe;
+	
 	private RelativeLayout 	ecran1;
 	private RelativeLayout 	ecran2;
+	private RelativeLayout	ecran3;
+	private RelativeLayout 	ecran4;
+	private RelativeLayout 	ecran5;
 	
 	private Button 	boutonA;
 	private int nb_clic_boutonA;
@@ -165,12 +182,29 @@ public class MainActivity extends Activity {
 		
 		ecran1 = (RelativeLayout)findViewById(R.id.ecran1);
 		ecran2 = (RelativeLayout)findViewById(R.id.ecran2);
+		ecran3 = (RelativeLayout)findViewById(R.id.ecran3);
+		ecran4 = (RelativeLayout)findViewById(R.id.ecran4);
+		ecran5 = (RelativeLayout)findViewById(R.id.ecran5);
 		
 		/*Ecran 2*/
 		kmDepuisPlein = (TextView)findViewById(R.id.tvKmDepuisPlein);
 		tvKm = (TextView)findViewById(R.id.km);
 		litresAuCent = (TextView)findViewById(R.id.litresAuCent);
 		tvLitres = (TextView)findViewById(R.id.tvLitres);
+		
+		/*Ecran4*/
+		kilometrage = (TextView)findViewById(R.id.kilometrage);
+		tvKilometrage = (TextView)findViewById(R.id.tvKmetrage);
+		kmLAC = (TextView)findViewById(R.id.litresAuCent4);
+		tvKmLAC = (TextView)findViewById(R.id.tvLAC);
+		kmLACAVG = (TextView)findViewById(R.id.LACAVG);
+		tvKmLACAVG = (TextView)findViewById(R.id.tvLACAvg);
+		
+		/*Ecran 5*/
+		kmLAC5 = (TextView)findViewById(R.id.LAC5);
+		tvKmLAC5 = (TextView)findViewById(R.id.tvLAC5);
+		kmToPompe = (TextView)findViewById(R.id.kmToPompe);
+		tvKmToPompe = (TextView)findViewById(R.id.tvKmToPompe);
 		
 		boutonA = (Button)findViewById(R.id.btnA);
 		
@@ -189,10 +223,26 @@ public class MainActivity extends Activity {
 		slash.setTypeface(font);
 		niveauBatterie.setTypeface(font);
 		
+		/*Ecran 2*/
 		kmDepuisPlein.setTypeface(font);
 		tvKm.setTypeface(font);
 		litresAuCent.setTypeface(font);
 		tvLitres.setTypeface(font);
+		
+		/*Ecran 4*/
+		kilometrage.setTypeface(font);
+		tvKilometrage.setTypeface(font);
+		kmLAC.setTypeface(font);
+		tvKmLAC.setTypeface(font);
+		kmLACAVG.setTypeface(font);
+		tvKmLACAVG.setTypeface(font);
+		
+		/*Ecran 5*/
+		kmLAC5.setTypeface(font);
+		tvKmLAC5.setTypeface(font);
+		kmToPompe.setTypeface(font);
+		tvKmToPompe.setTypeface(font);
+
 		
 		attribuer_jour = new Runnable(){
 			@Override
@@ -262,15 +312,34 @@ public class MainActivity extends Activity {
 				mois.setTextColor(getResources().getColor(R.color.blue));
 				slash.setTextColor(getResources().getColor(R.color.blue));
 				
+				
+				/*Ecran 2*/
 				kmDepuisPlein.setTextColor(getResources().getColor(R.color.blue));
 				tvKm.setTextColor(getResources().getColor(R.color.blue));
 				litresAuCent.setTextColor(getResources().getColor(R.color.blue));
 				tvLitres.setTextColor(getResources().getColor(R.color.blue));
 				
+				/*Ecran 4*/
+				kilometrage.setTextColor(getResources().getColor(R.color.blue));
+				tvKilometrage.setTextColor(getResources().getColor(R.color.blue));
+				kmLAC.setTextColor(getResources().getColor(R.color.blue));
+				tvKmLAC.setTextColor(getResources().getColor(R.color.blue));
+				kmLACAVG.setTextColor(getResources().getColor(R.color.blue));
+				tvKmLACAVG.setTextColor(getResources().getColor(R.color.blue));
+				
+				/*Ecran 5*/
+				kmLAC5.setTextColor(getResources().getColor(R.color.blue));
+				tvKmLAC5.setTextColor(getResources().getColor(R.color.blue));
+				kmToPompe.setTextColor(getResources().getColor(R.color.blue));
+				tvKmToPompe.setTextColor(getResources().getColor(R.color.blue));
+				
 				niveauBatterie.setTextColor(getResources().getColor(R.color.blue));
 				
 				ecran1.setVisibility(View.VISIBLE);
 				ecran2.setVisibility(View.GONE);
+				ecran3.setVisibility(View.GONE);
+				ecran4.setVisibility(View.GONE);
+				ecran5.setVisibility(View.GONE);
 
 				handler.postDelayed(setup, 2000);
 			}
@@ -407,15 +476,49 @@ public class MainActivity extends Activity {
 							case 0:
 								ecran1.setVisibility(View.GONE);
 								ecran2.setVisibility(View.VISIBLE);
+								ecran3.setVisibility(View.GONE);
+								ecran4.setVisibility(View.GONE);
+								ecran5.setVisibility(View.GONE);
 								nb_clic_boutonA++;
 								break;
 								
 							case 1:
+								ecran1.setVisibility(View.GONE);
+								ecran2.setVisibility(View.GONE);
+								ecran3.setVisibility(View.VISIBLE);
+								ecran4.setVisibility(View.GONE);
+								ecran5.setVisibility(View.GONE);
+								nb_clic_boutonA++;
+								break;
+								
+							case 2:
+								ecran1.setVisibility(View.GONE);
+								ecran2.setVisibility(View.GONE);
+								ecran3.setVisibility(View.GONE);
+								ecran4.setVisibility(View.VISIBLE);
+								ecran5.setVisibility(View.GONE);
+								nb_clic_boutonA++;
+								break;
+								
+							case 3:
+								ecran1.setVisibility(View.GONE);
+								ecran2.setVisibility(View.GONE);
+								ecran3.setVisibility(View.GONE);
+								ecran4.setVisibility(View.GONE);
+								ecran5.setVisibility(View.VISIBLE);
+								nb_clic_boutonA++;
+								break;
+								
+							case 4:
 								ecran1.setVisibility(View.VISIBLE);
 								ecran2.setVisibility(View.GONE);
+								ecran3.setVisibility(View.GONE);
+								ecran4.setVisibility(View.GONE);
 								nb_clic_boutonA = 0; //Retour au début 
 								break;
 								
+							default:
+								break;
 						}
 					}
 				}
