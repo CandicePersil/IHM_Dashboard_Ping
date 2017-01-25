@@ -78,8 +78,14 @@ public class MainActivity extends Activity {
 	private Button boutonB;
 	
 	private int cligno_heure;
-	private boolean heureIsActivated;
+	private int cligno_minute;
+	private int cligno_jour_lettres;
+	private boolean longClickIsActivated;
+	private boolean BIsClicked;
 	private int nb_appels_bouton_A;
+	private int date;					//1: heures /2: minutes /3: nom jour /4: jour /5: mois
+	private int cligno_jours;
+	private int cligno_mois;
 	
 	private boolean id_cligno;
 	private int nb_clic_gauche;
@@ -128,8 +134,12 @@ public class MainActivity extends Activity {
 	private Runnable setup;
 	private Runnable clignoter;
 	private Runnable heure_clignoter;
+	private Runnable minute_clignoter;
+	private Runnable nom_jour_clignoter;
+	private Runnable jour_clignoter;
 	private Runnable batterie_clignoter;
 	private Runnable attribuer_jour;
+	private Runnable mois_clignoter;
 	
 	
 	/***********************
@@ -307,11 +317,9 @@ public class MainActivity extends Activity {
 					break;
 					
 				default:
-					joursLettres.setText("ERR");
+					joursLettres.setText(" ");
 					break;
-				}
-				
-				
+				}	
 			}
 		};
 
@@ -396,6 +404,22 @@ public class MainActivity extends Activity {
 				essence4.setBackgroundResource(R.color.bck_color);
 				essence5.setBackgroundResource(R.color.bck_color);
 				
+				/*Initialisation de la date*/
+				calendrier = Calendar.getInstance();
+				intMinutes = calendrier.get(Calendar.MINUTE);
+				intHeures = calendrier.get(Calendar.HOUR_OF_DAY);
+				intJour_nb = calendrier.get(Calendar.DAY_OF_MONTH);
+				intJour_nom = calendrier.get(Calendar.DAY_OF_WEEK);
+				intMois = calendrier.get(Calendar.MONTH) + 1;
+				
+				heures.setText(Integer.toString(intHeures));
+				deuxPoints.setText(":");
+				slash.setText("/");
+				minutes.setText(Integer.toString(intMinutes));
+				attribuer_jour.run();
+				jours.setText(Integer.toString(intJour_nb));
+				mois.setText(Integer.toString(intMois));
+				
 				
 				//met l'angle d'origine de la vitesse en Km à 0
 				fltVitesse = 0.0f;
@@ -425,13 +449,19 @@ public class MainActivity extends Activity {
 				nb_appels_bouton_A = 0;
 				
 				cligno_heure = 0;
-				heureIsActivated = false;
+				cligno_minute = 0;
+				longClickIsActivated = false;
+				BIsClicked = false;
+				date = 5;
+				cligno_jour_lettres = 0;
+				cligno_mois=0;
+				cligno_jours=0;
 			}
 		};
 		
 		handler.post(start);
 		
-		/*Mise à jour de l'heure et la date en temps réel*/
+		/*Mise à jour de l'heure et la date en temps réel
 		Thread t = new Thread(){
 			@Override
 			public void run(){
@@ -442,7 +472,7 @@ public class MainActivity extends Activity {
 							@Override
 							public void run(){
 								
-								if (!heureIsActivated){
+								if (cligno_heure == 0){
 								
 									calendrier = Calendar.getInstance();
 									intMinutes = calendrier.get(Calendar.MINUTE);
@@ -468,7 +498,7 @@ public class MainActivity extends Activity {
 			}
 		};
 		
-		t.start();
+		t.start();*/
 		
 		/*Fonction permettant au clignotant de se mettre en marche*/
 		clignoter = new Runnable(){
@@ -499,6 +529,11 @@ public class MainActivity extends Activity {
 			@Override
 			public void run(){
 
+				date = 0;
+				
+				mois.setVisibility(View.VISIBLE);
+				handler.removeCallbacks(mois_clignoter);
+				
 				if (cligno_heure%2 == 0){
 					heures.setVisibility(View.INVISIBLE);
 				}
@@ -506,8 +541,126 @@ public class MainActivity extends Activity {
 					heures.setVisibility(View.VISIBLE);
 				}
 				
+				if (BIsClicked == true){
+					intHeures = Integer.parseInt(heures.getText().toString());
+					heures.setText(String.valueOf((intHeures+1)%24));
+					
+					BIsClicked = false;
+				}
+				
 				handler.postDelayed(heure_clignoter, 400);
 				cligno_heure++;
+			}
+		};
+		
+		minute_clignoter = new Runnable(){
+			@Override
+			public void run(){
+				
+				date = 1;
+				
+				heures.setVisibility(View.VISIBLE);
+				handler.removeCallbacks(heure_clignoter);
+				
+				if (cligno_minute%2 == 0){
+					minutes.setVisibility(View.INVISIBLE);
+				}
+				else{
+					minutes.setVisibility(View.VISIBLE);
+				}
+				
+				if (BIsClicked == true){
+					intMinutes = Integer.parseInt(minutes.getText().toString());
+					minutes.setText(String.valueOf((intMinutes+1)%60));
+					
+					BIsClicked = false;
+				}
+				
+				handler.postDelayed(minute_clignoter, 400);
+				cligno_minute++;
+			}
+		};
+		
+		nom_jour_clignoter = new Runnable(){
+			@Override
+			public void run(){
+				date = 2;
+				
+				minutes.setVisibility(View.VISIBLE);
+				longClickIsActivated = false;
+				handler.removeCallbacks(minute_clignoter);
+				
+				if (cligno_jour_lettres%2 == 0){
+					joursLettres.setVisibility(View.INVISIBLE);
+				}
+				else{
+					joursLettres.setVisibility(View.VISIBLE);
+				}
+				
+				if (BIsClicked == true){
+					
+					intJour_nom = (intJour_nom + 1)%8;
+					handler.post(attribuer_jour);
+					
+					BIsClicked = false;
+				}
+				
+				handler.postDelayed(nom_jour_clignoter, 400);
+				cligno_jour_lettres++;
+			}
+		};
+		
+		jour_clignoter = new Runnable(){
+			@Override
+			public void run(){
+				date = 3;
+				
+				joursLettres.setVisibility(View.VISIBLE);
+				handler.removeCallbacks(nom_jour_clignoter);
+				
+				if (cligno_jours%2 == 0){
+					jours.setVisibility(View.INVISIBLE);
+				}
+				else{
+					jours.setVisibility(View.VISIBLE);
+				}
+				
+				if (BIsClicked == true){
+					intJour_nb = Integer.parseInt(jours.getText().toString());
+					jours.setText(String.valueOf((intJour_nb+1)%32));
+					
+					BIsClicked = false;
+				}
+				
+				handler.postDelayed(jour_clignoter, 400);
+				cligno_jours++;
+			}
+		};
+		
+		mois_clignoter = new Runnable(){
+			@Override
+			public void run(){
+				date = 4;
+				
+				jours.setVisibility(View.VISIBLE);
+				handler.removeCallbacks(jour_clignoter);
+				
+				if (cligno_mois%2 == 0){
+					mois.setVisibility(View.INVISIBLE);
+				}
+				else{
+					mois.setVisibility(View.VISIBLE);
+				}
+				
+				if (BIsClicked == true){
+					intMois = Integer.parseInt(mois.getText().toString());
+					mois.setText(String.valueOf((intMois+1)%13));
+					
+					BIsClicked = false;
+				}
+				
+				handler.postDelayed(mois_clignoter, 400);
+				cligno_mois++;
 			}
 		};
 		
@@ -530,60 +683,89 @@ public class MainActivity extends Activity {
 					
 					@Override
 					public void onClick(View v) {
-						switch (nb_clic_boutonA){
 						
-							case 0:
-								ecran1.setVisibility(View.GONE);
-								ecran2.setVisibility(View.VISIBLE);
-								ecran3.setVisibility(View.GONE);
-								ecran4.setVisibility(View.GONE);
-								ecran5.setVisibility(View.GONE);
-								
-								nb_clic_boutonA++;
-								break;
-								
-							case 1:
-								ecran1.setVisibility(View.GONE);
-								ecran2.setVisibility(View.GONE);
-								ecran3.setVisibility(View.VISIBLE);
-								ecran4.setVisibility(View.GONE);
-								ecran5.setVisibility(View.GONE);
-								nb_clic_boutonA++;
-								break;
-								
-							case 2:
-								ecran1.setVisibility(View.GONE);
-								ecran2.setVisibility(View.GONE);
-								ecran3.setVisibility(View.GONE);
-								ecran4.setVisibility(View.VISIBLE);
-								ecran5.setVisibility(View.GONE);
-								nb_clic_boutonA++;
-								break;
-								
-							case 3:
-								ecran1.setVisibility(View.GONE);
-								ecran2.setVisibility(View.GONE);
-								ecran3.setVisibility(View.GONE);
-								ecran4.setVisibility(View.GONE);
-								ecran5.setVisibility(View.VISIBLE);
-								nb_clic_boutonA++;
-								break;
-								
-							case 4:
-								ecran1.setVisibility(View.VISIBLE);
-								ecran2.setVisibility(View.GONE);
-								ecran3.setVisibility(View.GONE);
-								ecran4.setVisibility(View.GONE);
-								ecran5.setVisibility(View.GONE);
-								nb_clic_boutonA = 0; //Retour au début 
-								break;
-								
-							default:
-								break;
-						}
+						switch (date){
+						
+						
+						case 5:
+							switch (nb_clic_boutonA){
+							
+								case 0:
+									ecran1.setVisibility(View.GONE);
+									ecran2.setVisibility(View.VISIBLE);
+									ecran3.setVisibility(View.GONE);
+									ecran4.setVisibility(View.GONE);
+									ecran5.setVisibility(View.GONE);
+									
+									nb_clic_boutonA++;
+									break;
+									
+								case 1:
+									ecran1.setVisibility(View.GONE);
+									ecran2.setVisibility(View.GONE);
+									ecran3.setVisibility(View.VISIBLE);
+									ecran4.setVisibility(View.GONE);
+									ecran5.setVisibility(View.GONE);
+									nb_clic_boutonA++;
+									break;
+									
+								case 2:
+									ecran1.setVisibility(View.GONE);
+									ecran2.setVisibility(View.GONE);
+									ecran3.setVisibility(View.GONE);
+									ecran4.setVisibility(View.VISIBLE);
+									ecran5.setVisibility(View.GONE);
+									nb_clic_boutonA++;
+									break;
+									
+								case 3:
+									ecran1.setVisibility(View.GONE);
+									ecran2.setVisibility(View.GONE);
+									ecran3.setVisibility(View.GONE);
+									ecran4.setVisibility(View.GONE);
+									ecran5.setVisibility(View.VISIBLE);
+									nb_clic_boutonA++;
+									break;
+									
+								case 4:
+									ecran1.setVisibility(View.VISIBLE);
+									ecran2.setVisibility(View.GONE);
+									ecran3.setVisibility(View.GONE);
+									ecran4.setVisibility(View.GONE);
+									ecran5.setVisibility(View.GONE);
+									nb_clic_boutonA = 0; //Retour au début 
+									break;
+									
+								default:
+									break;
+							}
+							break;
+						
+						case 0 :
+							handler.post(minute_clignoter);
+							break;
+						
+						case 1:
+							handler.post(nom_jour_clignoter);
+							break;
+						
+						case 2:
+							handler.post(jour_clignoter);
+							break;	
+							
+						case 3:
+							handler.post(mois_clignoter);
+							break;
+							
+						case 4:
+							handler.post(heure_clignoter);
+							break;
+							
+						default:
+							break;
 					}
 				}
-				
+			}
 		);
 		
 		boutonA.setOnLongClickListener(
@@ -593,14 +775,23 @@ public class MainActivity extends Activity {
 					public boolean onLongClick(View v) {
 						
 						if (nb_appels_bouton_A%2 == 0){
-							heureIsActivated = true;
+							longClickIsActivated = true;
 							handler.post(heure_clignoter);
 							
 						}
 						else{
 							heures.setVisibility(View.VISIBLE);
-							heureIsActivated = false;
+							minutes.setVisibility(View.VISIBLE);
+							joursLettres.setVisibility(View.VISIBLE);
+							jours.setVisibility(View.VISIBLE);
+							mois.setVisibility(View.VISIBLE);
+							longClickIsActivated = false;
 							handler.removeCallbacks(heure_clignoter);
+							handler.removeCallbacks(minute_clignoter);
+							handler.removeCallbacks(nom_jour_clignoter);
+							handler.removeCallbacks(jour_clignoter);
+							handler.removeCallbacks(mois_clignoter);
+							date = 5;
 						}
 						
 						nb_appels_bouton_A++;
@@ -614,10 +805,8 @@ public class MainActivity extends Activity {
 					
 					@Override
 					public void onClick(View v) {
-						if (heureIsActivated){
-							intHeures = Integer.parseInt(heures.getText().toString());
-							heures.setText(String.valueOf(intHeures));
-						}
+						
+						BIsClicked = true;
 						
 					}
 				}
