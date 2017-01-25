@@ -7,13 +7,16 @@ import android.content.pm.ActivityInfo;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
+import android.support.v4.widget.DrawerLayout;
 import android.view.*;
 import android.widget.*;
+
+
 
 //
 public class MainActivity extends Activity {
 
+	
 	/*Création des variables*/
 	private RelativeLayout 	clignoGauche;
 	private RelativeLayout 	clignoDroit;
@@ -24,7 +27,6 @@ public class MainActivity extends Activity {
 	private RelativeLayout 	batterie;			//voyant batterie moteur
 	private RelativeLayout 	feuxRoute;
 	private RelativeLayout 	feuxCroisement;
-	private RelativeLayout 	essence;
 	private TextView 		vitesses;			//vitesses passées par le motard
 	private TextView 		pointMort;			//voyant point mort
 	private TextView 		heures;				
@@ -37,6 +39,12 @@ public class MainActivity extends Activity {
 	private RelativeLayout 	rlAiguilleTours;
 	private TextView 		niveauBatterie;
 	private RelativeLayout 	rlAiguille;
+	
+	private RelativeLayout 	essence1;			//Voyant essence écran 1
+	private RelativeLayout 	essence2;
+	private RelativeLayout 	essence3;
+	private RelativeLayout	essence4;
+	private RelativeLayout 	essence5;
 	
 	/*Ecran 2*/
 	private TextView 		kmDepuisPlein;
@@ -66,6 +74,12 @@ public class MainActivity extends Activity {
 	
 	private Button 	boutonA;
 	private int nb_clic_boutonA;
+	
+	private Button boutonB;
+	
+	private int cligno_heure;
+	private boolean heureIsActivated;
+	private int nb_appels_bouton_A;
 	
 	private boolean id_cligno;
 	private int nb_clic_gauche;
@@ -104,11 +118,16 @@ public class MainActivity extends Activity {
 	private float angleVitesse;
 	private float angleTours;
 	
+	/*Navigation bar
+	private DrawerLayout 	drawerLayout;
+	private ListView 		listView;*/
+	
 	/*Fonctions*/
 	private Handler handler = new Handler();
 	private Runnable start;
 	private Runnable setup;
 	private Runnable clignoter;
+	private Runnable heure_clignoter;
 	private Runnable batterie_clignoter;
 	private Runnable attribuer_jour;
 	
@@ -146,7 +165,12 @@ public class MainActivity extends Activity {
 		tempHuile = (RelativeLayout)findViewById(R.id.rlTempHuile);
 		tempLiquide = (RelativeLayout)findViewById(R.id.rlTempLiquide);
 		huile = (RelativeLayout)findViewById(R.id.rlHuile);
-		essence = (RelativeLayout)findViewById(R.id.rlEssence);
+		
+		essence1 = (RelativeLayout)findViewById(R.id.rlEssence1);
+		essence2 = (RelativeLayout)findViewById(R.id.rlEssence2);
+		essence3 = (RelativeLayout)findViewById(R.id.rlEssence3);
+		essence4 = (RelativeLayout)findViewById(R.id.rlEssence4);
+		essence5 = (RelativeLayout)findViewById(R.id.rlEssence5);
 		
 		feuxCroisement = (RelativeLayout)findViewById(R.id.croisement);
 		feuxRoute = (RelativeLayout)findViewById(R.id.phares);
@@ -207,10 +231,15 @@ public class MainActivity extends Activity {
 		tvKmToPompe = (TextView)findViewById(R.id.tvKmToPompe);
 		
 		boutonA = (Button)findViewById(R.id.btnA);
+		boutonB = (Button)findViewById(R.id.btnB);
 		
 		/*Test*/
 		etVitesse = (EditText)findViewById(R.id.editTextVitesse);
 		etBoiteVit = (EditText)findViewById(R.id.editTextBoiteVit);
+		
+		/*Navigation Bar
+		drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
+		listView = (ListView)findViewById(R.id.left_drawer);*/
 		
 		vitesses.setTypeface(font);
 		pointMort.setTypeface(font);
@@ -299,7 +328,6 @@ public class MainActivity extends Activity {
 				tempHuile.setBackgroundResource(R.color.orange);
 				feuxRoute.setBackgroundResource(R.color.blue);
 				feuxCroisement.setBackgroundResource(R.color.green);
-				essence.setBackgroundResource(R.color.orange);
 				
 				//Font
 				vitesses.setTextColor(getResources().getColor(R.color.blue));
@@ -361,7 +389,14 @@ public class MainActivity extends Activity {
 				tempHuile.setBackgroundResource(R.color.bck_color);
 				feuxRoute.setBackgroundResource(R.color.bck_color);
 				feuxCroisement.setBackgroundResource(R.color.bck_color);
-				essence.setBackgroundResource(R.color.bck_color);
+
+				essence1.setBackgroundResource(R.color.bck_color);
+				essence2.setBackgroundResource(R.color.bck_color);
+				essence3.setBackgroundResource(R.color.bck_color);
+				essence4.setBackgroundResource(R.color.bck_color);
+				essence5.setBackgroundResource(R.color.bck_color);
+				
+				
 				//met l'angle d'origine de la vitesse en Km à 0
 				fltVitesse = 0.0f;
 				angleVitesse = 45 + 135*fltVitesse/90;
@@ -387,6 +422,10 @@ public class MainActivity extends Activity {
 				niveau_batterie = 0;			//affichage du niveau de batterie
 				nb_clic_essence = 0;
 				nb_clic_boutonA = 0;
+				nb_appels_bouton_A = 0;
+				
+				cligno_heure = 0;
+				heureIsActivated = false;
 			}
 		};
 		
@@ -403,20 +442,23 @@ public class MainActivity extends Activity {
 							@Override
 							public void run(){
 								
-								calendrier = Calendar.getInstance();
-								intMinutes = calendrier.get(Calendar.MINUTE);
-								intHeures = calendrier.get(Calendar.HOUR_OF_DAY);
-								intJour_nb = calendrier.get(Calendar.DAY_OF_MONTH);
-								intJour_nom = calendrier.get(Calendar.DAY_OF_WEEK);
-								intMois = calendrier.get(Calendar.MONTH) + 1;
+								if (!heureIsActivated){
 								
-								heures.setText(Integer.toString(intHeures));
-								deuxPoints.setText(":");
-								slash.setText("/");
-								minutes.setText(Integer.toString(intMinutes));
-								attribuer_jour.run();
-								jours.setText(Integer.toString(intJour_nb));
-								mois.setText(Integer.toString(intMois));
+									calendrier = Calendar.getInstance();
+									intMinutes = calendrier.get(Calendar.MINUTE);
+									intHeures = calendrier.get(Calendar.HOUR_OF_DAY);
+									intJour_nb = calendrier.get(Calendar.DAY_OF_MONTH);
+									intJour_nom = calendrier.get(Calendar.DAY_OF_WEEK);
+									intMois = calendrier.get(Calendar.MONTH) + 1;
+									
+									heures.setText(Integer.toString(intHeures));
+									deuxPoints.setText(":");
+									slash.setText("/");
+									minutes.setText(Integer.toString(intMinutes));
+									attribuer_jour.run();
+									jours.setText(Integer.toString(intJour_nb));
+									mois.setText(Integer.toString(intMois));
+								}
 							}
 						});
 					}
@@ -452,6 +494,23 @@ public class MainActivity extends Activity {
 			}
 		};
 		
+		/*Fonction permettant à l'heure de clignoter apres appui long sur A*/
+		heure_clignoter = new Runnable(){
+			@Override
+			public void run(){
+
+				if (cligno_heure%2 == 0){
+					heures.setVisibility(View.INVISIBLE);
+				}
+				else{
+					heures.setVisibility(View.VISIBLE);
+				}
+				
+				handler.postDelayed(heure_clignoter, 400);
+				cligno_heure++;
+			}
+		};
+		
 		batterie_clignoter = new Runnable(){
 			@Override
 			public void run(){
@@ -479,6 +538,7 @@ public class MainActivity extends Activity {
 								ecran3.setVisibility(View.GONE);
 								ecran4.setVisibility(View.GONE);
 								ecran5.setVisibility(View.GONE);
+								
 								nb_clic_boutonA++;
 								break;
 								
@@ -514,6 +574,7 @@ public class MainActivity extends Activity {
 								ecran2.setVisibility(View.GONE);
 								ecran3.setVisibility(View.GONE);
 								ecran4.setVisibility(View.GONE);
+								ecran5.setVisibility(View.GONE);
 								nb_clic_boutonA = 0; //Retour au début 
 								break;
 								
@@ -523,6 +584,43 @@ public class MainActivity extends Activity {
 					}
 				}
 				
+		);
+		
+		boutonA.setOnLongClickListener(
+				new View.OnLongClickListener() {
+					
+					@Override
+					public boolean onLongClick(View v) {
+						
+						if (nb_appels_bouton_A%2 == 0){
+							heureIsActivated = true;
+							handler.post(heure_clignoter);
+							
+						}
+						else{
+							heures.setVisibility(View.VISIBLE);
+							heureIsActivated = false;
+							handler.removeCallbacks(heure_clignoter);
+						}
+						
+						nb_appels_bouton_A++;
+						return true;
+					}
+				}			
+		);
+		
+		boutonB.setOnClickListener(
+				new View.OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						if (heureIsActivated){
+							intHeures = Integer.parseInt(heures.getText().toString());
+							heures.setText(String.valueOf(intHeures));
+						}
+						
+					}
+				}
 		);
 		
 	}
@@ -838,10 +936,18 @@ public class MainActivity extends Activity {
 				
 			case R.id.itemOilLevel:
 				if (nb_clic_essence%2 == 0){
-					essence.setBackgroundResource(R.color.orange);
+					essence1.setBackgroundResource(R.color.orange);
+					essence2.setBackgroundResource(R.color.orange);
+					essence3.setBackgroundResource(R.color.orange);
+					essence4.setBackgroundResource(R.color.orange);
+					essence5.setBackgroundResource(R.color.orange);
 				}
 				else{
-					essence.setBackgroundResource(R.color.bck_color);
+					essence1.setBackgroundResource(R.color.bck_color);
+					essence2.setBackgroundResource(R.color.bck_color);
+					essence3.setBackgroundResource(R.color.bck_color);
+					essence4.setBackgroundResource(R.color.bck_color);
+					essence5.setBackgroundResource(R.color.bck_color);
 				}
 				nb_clic_essence++;
 				return true;

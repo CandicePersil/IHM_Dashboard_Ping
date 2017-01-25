@@ -1,5 +1,11 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+<ScrollView
     android:id="@+id/mainLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -471,7 +477,7 @@
                             android:src="@drawable/essence_bleu" />
 
                         <RelativeLayout
-                            android:id="@+id/rlEssence"
+                            android:id="@+id/rlEssence1"
                             android:layout_width="70dp"
                             android:layout_height="70dp"
                             android:layout_marginTop="10dp"
@@ -501,6 +507,7 @@
                             android:orientation="vertical" >
 
                             <RelativeLayout
+                                android:id="@+id/rlEssence2"
                                 android:layout_width="70dp"
                                 android:layout_height="70dp"
                                 android:layout_marginBottom="20dp"
@@ -622,6 +629,7 @@
                             android:orientation="vertical" >
 
                             <RelativeLayout
+                                android:id="@+id/rlEssence3"
                                 android:layout_width="70dp"
                                 android:layout_height="70dp"
                                 android:layout_gravity="center_horizontal"
@@ -717,6 +725,7 @@
                             android:orientation="vertical" >
 
                             <RelativeLayout
+                                android:id="@+id/rlEssence4"
                                 android:layout_width="70dp"
                                 android:layout_height="70dp"
                                 android:layout_gravity="center_horizontal"
@@ -799,7 +808,8 @@
                     <RelativeLayout
                         android:id="@+id/ecran5"
                         android:layout_width="match_parent"
-                        android:layout_height="250dp" >
+                        android:layout_height="250dp"
+                        android:visibility="gone" >
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -808,6 +818,7 @@
                             android:orientation="vertical" >
 
                             <RelativeLayout
+                                android:id="@+id/rlEssence5"
                                 android:layout_width="70dp"
                                 android:layout_height="70dp"
                                 android:layout_gravity="center_horizontal"
@@ -976,3 +987,14 @@
 
         </RelativeLayout>
 </ScrollView>
+
+<!-- The navigation drawer -->
+    <ListView android:id="@+id/left_drawer"
+        android:layout_width="240dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:choiceMode="singleChoice"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="0dp"
+        android:background="#111"/>
+</android.support.v4.widget.DrawerLayout>
