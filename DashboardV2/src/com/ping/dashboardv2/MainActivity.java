@@ -805,9 +805,7 @@ public class MainActivity extends Activity {
 					
 					@Override
 					public void onClick(View v) {
-						
 						BIsClicked = true;
-						
 					}
 				}
 		);
@@ -1076,9 +1074,11 @@ public class MainActivity extends Activity {
 			case R.id.itemRoute:
 				if (nb_clic_feux_route%2 == 0){
 					feuxRoute.setBackgroundResource(R.color.blue);
+					feuxCroisement.setBackgroundResource(R.color.green);
 				}
 				else{
 					feuxRoute.setBackgroundResource(R.color.bck_color);
+					feuxCroisement.setBackgroundResource(R.color.bck_color);
 				}
 				nb_clic_feux_route++;
 				return true;
